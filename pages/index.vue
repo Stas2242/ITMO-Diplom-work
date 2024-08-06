@@ -12,14 +12,16 @@ import BottomArticle from "~/components/BottomArticle.vue";
 import ModalProduct from "~/components/ModalProduct.vue";
 
 
-
 // // модальное окно
+let productForModal = ref([])
 const modalOn = ref(false)
-const modalOpen = () => {
+const modalOpen = (item) => {
   modalOn.value = true
+  productForModal.value.push(item) 
 }
 const modalClose = () => {
   modalOn.value = false
+  productForModal.value.shift() 
 }
 
 // Получение данных
@@ -27,7 +29,7 @@ const modalClose = () => {
 const items = ref([]);
 onMounted(async () => {
   try {
-    const { data } = await axios.get('/api/get_goods')
+    const { data } = await axios.get('/api/get_random_goods')
     items.value = data;
   } catch (err) {
     console.log(err)
@@ -37,41 +39,20 @@ onMounted(async () => {
 
 
 // // Добавление в корзину
-const cart = ref([])
 
 const addToCart = (item) => {
-  //   if (!item/isAdded) {
-  //   cart.value.push(item)
-  //   item.isAdded = true
-  // } else {
-  //   cart.value.splice(cart.value.indexOf(item), 1)
-  //   item.isAdded = false
-  // }
-  console.log(item)
-
+  const cart = []
+if (localStorage.getItem("basket")){
+  console.log("yes")
+} else {
+  console.log("no")
+}
 }
 
 provide('ModalActions', {
   modalOpen,
   modalClose
 })
-
-// console.log(items)
-
-  // const someProducts = [];
-
-    // for (let i = 0; i < 4; i++) {
-      // console.log(items)
-  //     // let randomProduct = items[Math.floor(Math.random() * items.length)];
-  //     // someProducts.forEach((product) => {
-  //     //   if (product.id == randomProduct.id) {
-  //     //     randomProduct = items[Math.floor(Math.random() * items.length)];
-  //     //   }
-  //     // })
-  //   //   someProducts.push(randomProduct);
-    // }
-  //   console.log(someProducts)
-
 
   definePageMeta({
   layout: false
@@ -83,11 +64,11 @@ provide('ModalActions', {
   <NuxtLayout name="header-home"/>
   <TopArticle />
   <AdvantegesArticle />
-  <ProductsArticle :items="items" @modal-open="modalOpen"/>
+  <ProductsArticle :items="items" @modal-open="modalOpen" @add-to-cart="addToCart"/>
   <AboutArticle />
   <BottomArticle />
 
-  <ModalProduct v-if="modalOn" @modal-close="modalClose" @add-to-cart="addToCart"/>
+  <ModalProduct v-if="modalOn" @modal-close="modalClose" @add-to-cart="addToCart" :productForModal="productForModal" />
   <NuxtLayout name="footer-home"/>
 
 

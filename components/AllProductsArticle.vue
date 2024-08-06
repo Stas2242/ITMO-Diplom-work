@@ -29,10 +29,6 @@ const emit = defineEmits(['modalOpen', 'addToCart']);
 
       
     </div>
-
-    <button class="bg-[#F9F9F9] text-[#2A254B] border-2 rounded p-1 max-w-40 cursor-pointer transition hover:-translate-y-1 hover:shadow-xl">
-      <div class="all-products-link"><NuxtLink to="/products">View collection</NuxtLink></div>
-    </button>
   </article>
 </template>
 

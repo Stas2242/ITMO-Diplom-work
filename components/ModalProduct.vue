@@ -3,6 +3,10 @@ import ProductInModal from "~/components/ProductInModal.vue";
 
 const emit = defineEmits(['modalClose', 'addToCart']);
 
+defineProps({
+  productForModal: Array,
+})
+
 </script>
 
 <template>
@@ -37,13 +41,21 @@ const emit = defineEmits(['modalClose', 'addToCart']);
       </div>
 
       <div class="modal-body flex justify-around flex-wrap">
-      <ProductInModal />  
+      <ProductInModal 
+      v-for="item in productForModal"
+      :key="item.id"
+      :productName="item.name" 
+      :imageUrl="item.imageurl" 
+      :price="item.price" 
+      :isAdded="item.isAdded"
+      :onClickAdd="() => emit('addToCart', item)"/>  
       </div>
 
       <div
         class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600"
       >
         <button
+        @click="onClickAdd"
           data-modal-hide="large-modal"
           type="button"
           class="addBtn text-white bg-[#2A254B] hover:bg-violet-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#2A254B] dark:hover:bg-violet-400 dark:focus:ring-blue-800"
