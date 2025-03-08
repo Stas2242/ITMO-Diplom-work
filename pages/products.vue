@@ -15,7 +15,7 @@ import axios from "axios";
 const items = ref([]);
 onMounted(async () => {
   try {
-    const { data } = await axios.get("/api/get_goods");
+    const { data } = await axios.get('https://b255ba40d215731e.mokky.dev/goods');
     items.value = data;
   } catch (err) {
     console.log(err);

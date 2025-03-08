@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <div class="modal fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-70">
-    <div class="bg-white w-full fixed top-0 left-0 z-60 rounded-lg shadow">
+    <div class="bg-white w-full fixed top-10 sm:top-20 left-0 z-60 rounded-lg shadow">
       <div
         class="flex items-end p-4 md:p-5 border-b rounded-t dark:border-gray-600"
       >
@@ -40,12 +40,13 @@ defineProps({
         </button>
       </div>
 
-      <div class="modal-body flex justify-around flex-wrap">
+      <div class="modal-body flex flex-col justify-center">
       <ProductInModal 
       v-for="item in productForModal"
       :key="item.id"
       :productName="item.name" 
       :imageUrl="item.imageurl" 
+      :description="item.description"
       :price="item.price" 
       :isAdded="item.isAdded"
       :onClickAdd="() => emit('addToCart', item)"/>  

@@ -10,10 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@prisma/client": "^5.16.1",
     "axios": "^1.7.2",
     "nuxt": "^3.12.2",
-    "prisma": "^5.16.1",
     "vue": "latest"
   },
   "devDependencies": {

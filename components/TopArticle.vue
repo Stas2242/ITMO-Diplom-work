@@ -7,7 +7,7 @@
         Luxury homeware for people who love timeless desighn quality
       </div>
       <div class="text-[#726E8D] text-base py-3">
-        Shop the new Spring 2024 collection today
+        Shop the new Spring 2025 collection today
       </div>
       <div class="flex justify-center py-3">
         <button
