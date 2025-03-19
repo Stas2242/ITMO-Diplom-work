@@ -46,18 +46,6 @@ onMounted(async () => {
 })
 
 
-
-// // Добавление в корзину
-
-const addToCart = (item) => {
-  const cart = []
-if (localStorage.getItem("basket")){
-  console.log("yes")
-} else {
-  console.log("no")
-}
-}
-
 provide('ModalActions', {
   modalOpen,
   modalClose
@@ -73,11 +61,11 @@ provide('ModalActions', {
   <NuxtLayout name="header-home"/>
   <TopArticle />
   <AdvantegesArticle />
-  <ProductsArticle :items="items" @modal-open="modalOpen" @add-to-cart="addToCart"/>
+  <ProductsArticle :items="items" @modal-open="modalOpen" />
   <AboutArticle />
   <BottomArticle />
 
-  <ModalProduct v-if="modalOn" @modal-close="modalClose" @add-to-cart="addToCart" :productForModal="productForModal" />
+  <ModalProduct v-if="modalOn" @modal-close="modalClose" :productForModal="productForModal" />
   <NuxtLayout name="footer-home"/>
 
 

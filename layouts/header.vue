@@ -1,3 +1,9 @@
+<script setup>
+import { useCartStore } from "~/stores/cart";
+
+const cartStore = useCartStore();
+</script>
+
 <template>
   <header class="w-full min-h-32 bg-white flex justify-center">
     <div class="flex flex-col w-11/12 justify-around">
@@ -23,15 +29,18 @@
           </svg>
         </div>
         <div class="text-4xl test-[#22202E]">
-          <div class="return-home">Avion</div>
+          <div class="return-home"><NuxtLink to="/">Avion</NuxtLink></div>
         </div>
         <div class="cart-link flex justify-between min-w-16">
           <div>
             <NuxtLink to="/cart">
-              <img class="cart-icon_empty" src="/img/icons8-24.png" alt="" />
-              <img class="cart-icon_full hidden" src="/img/icons8.gif" alt="" />
+              <div v-if="cartStore.items.length === 0">
+                <img class="cart-icon_empty" src="/img/icons8-24.png" alt="" />
+              </div>
+              <div v-else>
+                <img class="cart-icon_full" src="/img/icons8.gif" alt="" />
+              </div>
             </NuxtLink>
-            
           </div>
           <div class="devNotice">
             <svg
@@ -63,7 +72,9 @@
       <nav>
         <ul class="flex flex-wrap justify-center text-[#726E8D] text-lg">
           <li class="return-home p-1"><NuxtLink to="/">Home</NuxtLink></li>
-          <li class="all-products-link p-1"><NuxtLink to="/products">All products</NuxtLink></li>
+          <li class="all-products-link p-1">
+            <NuxtLink to="/products">All products</NuxtLink>
+          </li>
           <li class="devNotice p-1">Furniture</li>
           <li class="devNotice p-1">Decore</li>
           <li class="devNotice p-1">Kitchenware</li>

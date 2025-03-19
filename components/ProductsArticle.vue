@@ -5,8 +5,7 @@ defineProps({
   items: Array
 })
 
-const emit = defineEmits(['modalOpen', 'addToCart']);
- 
+const emit = defineEmits(['modalOpen']);
 
 
 </script>
@@ -23,10 +22,10 @@ const emit = defineEmits(['modalOpen', 'addToCart']);
       :imageUrl="item.imageurl" 
       :description="item.description"
       :price="item.price" 
-      :isAdded="item.isAdded"
-      :onClickAdd="() => emit('addToCart', item)" 
-      :onClickModal="() => emit('modalOpen', item)"/>
-
+      :isAdded="item.isAdded" 
+      :onClickModal="() => emit('modalOpen', item)"
+      :item="item"
+      />
       
     </div>
 

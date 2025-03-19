@@ -8,6 +8,9 @@
 <script setup>
 import AllProductsArticle from "~/components/AllProductsArticle.vue";
 import ModalProduct from "~/components/ModalProduct.vue";
+import { useCartStore } from '~/stores/cart';
+
+const cartStore = useCartStore();
 
 import { onMounted, ref } from "vue";
 import axios from "axios";
@@ -33,6 +36,11 @@ const modalClose = () => {
   modalOn.value = false
   productForModal.value.shift() 
 }
+
+// Добавление товара в корзину
+const addToCart = (item) => {
+  cartStore.addItem(item);
+};
 
 definePageMeta({
   layout: false,

@@ -1,14 +1,16 @@
 <template>
-<NuxtLayout name="header"/>
-<CartTemplate/>
+  <div class="h-screen flex flex-col justify-between">
+    <NuxtLayout name="header" />
+    <CartTemplate />
 
-<NuxtLayout name="footer"/>
+    <NuxtLayout name="footer" />
+  </div>
 </template>
 
 <script setup>
-import CartTemplate from "~/components/CartTemplate.vue"
+import CartTemplate from "~/components/CartTemplate.vue";
 
 definePageMeta({
-  layout: false
-})
+  layout: false,
+});
 </script>

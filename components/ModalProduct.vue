@@ -1,17 +1,27 @@
 <script setup>
 import ProductInModal from "~/components/ProductInModal.vue";
+import AddBtn from "~/components/AddBtn.vue";
+import { ref } from 'vue';
 
-const emit = defineEmits(['modalClose', 'addToCart']);
+const emit = defineEmits(['modalClose']);
 
 defineProps({
   productForModal: Array,
 })
 
+// Локальное состояние для количества товара
+const quantity = ref(1);
+
+// Обработчик обновления количества
+const updateQuantity = (newQuantity) => {
+  quantity.value = newQuantity;
+};
+
 </script>
 
 <template>
-  <div class="modal fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-70">
-    <div class="bg-white w-full fixed top-10 sm:top-20 left-0 z-60 rounded-lg shadow">
+  <div class="modal fixed top-0 left-0 z-50 w-full h-full flex justify-center sm:items-center  bg-black bg-opacity-70">
+      <div class="bg-white w-full sm:w-11/12 md:w-10/12 h-fit sm:rounded-lg shadow"> 
       <div
         class="flex items-end p-4 md:p-5 border-b rounded-t dark:border-gray-600"
       >
@@ -47,22 +57,16 @@ defineProps({
       :productName="item.name" 
       :imageUrl="item.imageurl" 
       :description="item.description"
-      :price="item.price" 
-      :isAdded="item.isAdded"
-      :onClickAdd="() => emit('addToCart', item)"/>  
+      :price="item.price"
+      :amount="item.amount" 
+      @update-quantity="updateQuantity"
+      />  
       </div>
 
       <div
         class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600"
       >
-        <button
-        @click="onClickAdd"
-          data-modal-hide="large-modal"
-          type="button"
-          class="addBtn text-white bg-[#2A254B] hover:bg-violet-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#2A254B] dark:hover:bg-violet-400 dark:focus:ring-blue-800"
-        >
-          Add to cart
-        </button>
+      <AddBtn :item="productForModal[0]" :quantity="quantity" />
       </div>
     </div>
   </div>
